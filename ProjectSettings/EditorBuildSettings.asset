@@ -5,10 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Week7_OrangeScene.unity
-    guid: 9dfb9dd8985cc415a9a03a4d49f4078b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 0b386496cd0caba45977305490c7c97a
+  - enabled: 1
+    path: Assets/Scenes/ModifiedScene.unity
+    guid: a5cfe434e092f574daa6c2e93aaedf7f
   m_configObjects: {}

@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
     private int pickupCount;
     private Timer timer;
     private bool gameOver = false;
+    public GameObject resetPoint;
+    public bool resetting = false;
+    public Color originalColour;
+    CameraController CameraController;
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -34,6 +38,9 @@ public class PlayerController : MonoBehaviour
         inGamePanel.SetActive(true);
         //Turn off our win panel
         winPanel.SetActive(false);
+        originalColour = GetComponent<Renderer>().material.color;
+
+        CameraController = FindObjectOfType<CameraController>();
     }
 
     void Update()
@@ -44,7 +51,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameOver == true)
+        if (gameOver == true || resetting)
         {
             return;
         }
@@ -54,6 +61,14 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement  = new Vector3(moveHorizontal, 0, moveVertical);   
         rb.AddForce(movement * speed);
+
+        if (CameraController.cameraStyle == CameraStyle.Free)
+        {
+            //Rotates the player to the direction of the camera
+            transform.eulerAngles = Camera.main.transform.eulerAngles;
+            //Translates the input vectors into coordinates
+            movement = transform.TransformDirection(movement);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -66,6 +81,29 @@ public class PlayerController : MonoBehaviour
             //Run the check pickups function
             CheckPickups();
         }
+        if (other.tag == "Respawn")
+        {
+            StartCoroutine(ResetPlayer());
+        }
+    }
+
+    public IEnumerator ResetPlayer()
+    {
+        resetting = true;
+        GetComponent<Renderer>().material.color = Color.black;
+        rb.velocity = Vector3.zero;
+        Vector3 startPos = transform.position;
+        float resetSpeed = 2f;
+        var i = 0.0f;
+        var rate = 1.0f / resetSpeed;
+        while (i < 1.0f)
+        {
+            i += Time.deltaTime * rate;
+            transform.position = Vector3.Lerp(startPos, resetPoint.transform.position, i);
+            yield return null;
+        }
+        GetComponent<Renderer>().material.color = originalColour;
+        resetting = false;
     }
 
     void CheckPickups()

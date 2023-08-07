@@ -59,8 +59,9 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        Vector3 movement  = new Vector3(moveHorizontal, 0, moveVertical);   
-        rb.AddForce(movement * speed);
+        
+        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+
 
         if (CameraController.cameraStyle == CameraStyle.Free)
         {
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
             //Translates the input vectors into coordinates
             movement = transform.TransformDirection(movement);
         }
+        rb.AddForce(movement * speed);
     }
 
     private void OnTriggerEnter(Collider other)

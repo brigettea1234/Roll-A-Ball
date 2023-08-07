@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
     public Transform pivot;
     public float rotationSpeed = 1f;
 
+    public Pause pause;
+
     private Vector3 offset;
     private Vector3 pivotOffset;
 
@@ -19,10 +21,15 @@ public class CameraController : MonoBehaviour
         pivotOffset = pivot.position - player.transform.position;
         //The offset from the player
         offset = transform.position - player.transform.position;
+
     }
 
     void LateUpdate()
     {
+        if(pause.isPaused)
+        {
+            return;
+        }
         // If we ar eusing the fixed camera mode
         if(cameraStyle == CameraStyle.Fixed)
         {

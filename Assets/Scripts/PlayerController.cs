@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public bool resetting = false;
     public Color originalColour;
     CameraController CameraController;
+    Vector3 movement;
+    bool grounded = true;
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -56,11 +58,20 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        //when grounded is true
+        if(grounded)
+        {
+
+            //player moves
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+            movement = new Vector3(moveHorizontal, 0, moveVertical);
+            rb.AddForce(movement * speed);
+        }
+        
 
         
-        Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
+        
 
 
         if (CameraController.cameraStyle == CameraStyle.Free)
@@ -70,7 +81,7 @@ public class PlayerController : MonoBehaviour
             //Translates the input vectors into coordinates
             movement = transform.TransformDirection(movement);
         }
-        rb.AddForce(movement * speed);
+        
     }
 
     private void OnTriggerEnter(Collider other)

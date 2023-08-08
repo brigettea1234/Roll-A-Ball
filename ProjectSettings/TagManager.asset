@@ -7,6 +7,7 @@ TagManager:
   - Pick Up
   - Ground
   - Wall
+  - Teleporter
   layers:
   - Default
   - TransparentFX

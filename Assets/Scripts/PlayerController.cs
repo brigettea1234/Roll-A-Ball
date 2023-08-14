@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5.0f;
+    [HideInInspector]
+    public float baseSpeed;
     private Rigidbody rb;
     private int pickupCount;
     private Timer timer;
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //power up speed
+        baseSpeed = speed;
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody>();
         //Get the number of pickups in our scene
@@ -66,7 +70,7 @@ public class PlayerController : MonoBehaviour
             float moveHorizontal = Input.GetAxis("Horizontal");
             float moveVertical = Input.GetAxis("Vertical");
             movement = new Vector3(moveHorizontal, 0, moveVertical);
-            rb.AddForce(movement * speed);
+
         }
         
 
@@ -81,7 +85,7 @@ public class PlayerController : MonoBehaviour
             //Translates the input vectors into coordinates
             movement = transform.TransformDirection(movement);
         }
-        
+        rb.AddForce(movement * speed);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -97,6 +101,27 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Respawn")
         {
             StartCoroutine(ResetPlayer());
+        }
+
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            other.GetComponent<Powerup>().UsePowerup();
+            other.gameObject.transform.position = Vector3.down * 1000;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == "Float")
+        {
+            transform.parent = collision.transform;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == "Float")
+        {
+            transform.parent = null;
         }
     }
 

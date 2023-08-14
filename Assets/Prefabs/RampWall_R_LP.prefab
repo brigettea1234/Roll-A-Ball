@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6714692914763872519}
   - component: {fileID: 916538876735295582}
   - component: {fileID: 4750629000195265691}
+  - component: {fileID: -2183662833332190953}
   m_Layer: 0
   m_Name: RampWall_R_LP
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-2183662833332190953
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3853274220348797669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2573776928600941461, guid: 2d3cdf92ae604ec40982be73957eb0a3, type: 3}

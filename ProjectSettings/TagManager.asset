@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Wall
   - Teleporter
+  - Float
+  - Powerup
   layers:
   - Default
   - TransparentFX

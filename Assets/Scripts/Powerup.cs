@@ -32,7 +32,8 @@ public class Powerup : MonoBehaviour
 
         //If this powerup is the shrink powerup, decrease the player size by half
         if (myPowerup == PowerupType.Shrink)
-            playerController.gameObject.transform.localScale = Vector3.one / 2;
+
+            playerController.gameObject.transform.localScale = Vector3.one / 5;
 
         //Start a coroutine to reset the powerups effects
         StartCoroutine(ResetPowerup());

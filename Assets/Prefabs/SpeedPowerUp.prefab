@@ -4939,4 +4939,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPowerup: 0
   powerupDuration: 1
-  powerupSpeed: 5
+  powerupSpeed: 2.5

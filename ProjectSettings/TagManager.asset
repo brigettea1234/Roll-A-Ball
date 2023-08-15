@@ -10,6 +10,8 @@ TagManager:
   - Teleporter
   - Float
   - Powerup
+  - CheckPoint
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

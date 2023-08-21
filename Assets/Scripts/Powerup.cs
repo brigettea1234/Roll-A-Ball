@@ -62,7 +62,7 @@ public class Powerup : MonoBehaviour
         //If this powerup relates to size, reset our player controller size to 1
         if (myPowerup == PowerupType.Grow || myPowerup == PowerupType.Shrink)
         {
-            playerController.gameObject.transform.localScale = Vector3.one;
+            playerController.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 
         //If this powerup relates to speed, reset our player controller speed to its base speed

@@ -12,12 +12,18 @@ public class PlayerController : MonoBehaviour
     private int pickupCount;
     private Timer timer;
     private bool gameOver = false;
-    public GameObject resetPoint;
-    public bool resetting = false;
-    public Color originalColour;
     CameraController CameraController;
     Vector3 movement;
     bool grounded = true;
+
+    [Header("Respawn")]
+    public GameObject resetPoint;
+    public GameObject checkPoint1;
+    public GameObject checkPoint2;
+    public GameObject checkPoint3;
+    public bool resetting = false;
+    public Color originalColour;
+    //public int checkPointCounter = 1;
 
     [Header("UI")]
     public GameObject inGamePanel;
@@ -108,6 +114,47 @@ public class PlayerController : MonoBehaviour
             other.GetComponent<Powerup>().UsePowerup();
             other.gameObject.transform.position = Vector3.down * 1000;
         }
+
+        //if(other.tag == "Checkpoint")
+        //{
+        //    checkPointCounter++;
+
+        //    if (checkPointCounter == 2)
+        //    {
+        //        resetPoint = checkPoint1;
+        //    }
+        //    if (checkPointCounter == 3)
+        //    {
+        //        resetPoint = checkPoint2;
+        //    }
+        //    if (checkPointCounter == 4)
+        //    {
+        //        resetPoint = checkPoint3;
+        //    }
+        //}
+
+        if(other.tag == "Checkpoint1")
+        {
+            resetPoint = checkPoint1;
+            //Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Checkpoint2")
+        {
+            resetPoint = checkPoint2;
+            checkPoint1.SetActive(false);
+            //Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Checkpoint3")
+        {
+            resetPoint = checkPoint3;
+            checkPoint1.SetActive(false);
+            checkPoint2.SetActive(false);
+            //Destroy(other.gameObject);
+
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)

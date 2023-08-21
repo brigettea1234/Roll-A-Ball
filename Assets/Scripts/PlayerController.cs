@@ -21,10 +21,10 @@ public class PlayerController : MonoBehaviour
     public GameObject checkPoint1;
     public GameObject checkPoint2;
     public GameObject checkPoint3;
+    public GameObject checkPoint4;
     public bool resetting = false;
     public Color originalColour;
-    //public int checkPointCounter = 1;
-
+    
     [Header("UI")]
     public GameObject inGamePanel;
     public GameObject winPanel;
@@ -115,44 +115,39 @@ public class PlayerController : MonoBehaviour
             other.gameObject.transform.position = Vector3.down * 1000;
         }
 
-        //if(other.tag == "Checkpoint")
-        //{
-        //    checkPointCounter++;
-
-        //    if (checkPointCounter == 2)
-        //    {
-        //        resetPoint = checkPoint1;
-        //    }
-        //    if (checkPointCounter == 3)
-        //    {
-        //        resetPoint = checkPoint2;
-        //    }
-        //    if (checkPointCounter == 4)
-        //    {
-        //        resetPoint = checkPoint3;
-        //    }
-        //}
-
+        //If player rolls through checkpoint1, they will be transported to checkpoint1 when they die
         if(other.tag == "Checkpoint1")
         {
+            other.GetComponent<Particles>().CreateParticles();
             resetPoint = checkPoint1;
-            //Destroy(other.gameObject);
+           
         }
 
         if (other.tag == "Checkpoint2")
         {
+            other.GetComponent<Particles>().CreateParticles();
             resetPoint = checkPoint2;
-            checkPoint1.SetActive(false);
-            //Destroy(other.gameObject);
+            checkPoint1.SetActive(false);       //Checkpoint1 will become inactive when player rolls through next  checkpoint
+           
         }
 
         if (other.tag == "Checkpoint3")
         {
+            other.GetComponent<Particles>().CreateParticles();
             resetPoint = checkPoint3;
             checkPoint1.SetActive(false);
             checkPoint2.SetActive(false);
-            //Destroy(other.gameObject);
+            
+        }
 
+        if (other.tag == "Checkpoint4")
+        {
+            other.GetComponent<Particles>().CreateParticles();
+            resetPoint = checkPoint4;
+            checkPoint1.SetActive(false);
+            checkPoint2.SetActive(false);
+            checkPoint3.SetActive(false);
+            
         }
 
     }

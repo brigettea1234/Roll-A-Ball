@@ -12,6 +12,11 @@ TagManager:
   - Powerup
   - CheckPoint
   - Checkpoint
+  - Checkpoint1
+  - Checkpoint2
+  - Checkpoint3
+  - Checkpoint5
+  - Checkpoint4
   layers:
   - Default
   - TransparentFX

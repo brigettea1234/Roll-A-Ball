@@ -18,7 +18,7 @@ public class Teleporter : MonoBehaviour
         {
             myPartner.GetComponent<Teleporter>().canTeleport = false;
             //Offset the y pos so we don't move into the ground
-            Vector3 endPos = new Vector3(myPartner.transform.position.x, 1, myPartner.transform.position.z);
+            Vector3 endPos = new Vector3(myPartner.transform.position.x, myPartner.transform.position.y, myPartner.transform.position.z);
             other.transform.position = endPos;
         }
     }

@@ -11,6 +11,7 @@ public class Powerup : MonoBehaviour
     public float powerupDuration = 7f;      //The duration of the powerup
     public float powerupSpeed = 5;          //The speed of the powerup
     PlayerController playerController;      //A reference to our player controller
+    CameraController cameraController;      //A reference to our camera controller
 
     void Start()
     {
@@ -32,8 +33,12 @@ public class Powerup : MonoBehaviour
 
         //If this powerup is the shrink powerup, decrease the player size by half
         if (myPowerup == PowerupType.Shrink)
-
+        {
             playerController.gameObject.transform.localScale = Vector3.one / 5;
+            cameraController.ShrinkOffset();
+        }
+
+
 
         //Start a coroutine to reset the powerups effects
         StartCoroutine(ResetPowerup());
@@ -63,6 +68,7 @@ public class Powerup : MonoBehaviour
         if (myPowerup == PowerupType.Grow || myPowerup == PowerupType.Shrink)
         {
             playerController.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            cameraController.GrowOffset();
         }
 
         //If this powerup relates to speed, reset our player controller speed to its base speed

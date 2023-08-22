@@ -14,6 +14,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 offset;
     private Vector3 pivotOffset;
+    private Vector3 originalOffset;
+    private Vector3 smallOffset;
 
     void Start()
     {
@@ -21,7 +23,7 @@ public class CameraController : MonoBehaviour
         pivotOffset = pivot.position - player.transform.position;
         //The offset from the player
         offset = transform.position - player.transform.position;
-
+        originalOffset = offset;
     }
 
     void LateUpdate()
@@ -53,5 +55,14 @@ public class CameraController : MonoBehaviour
         }
         //Get the cameras transform position to be that of the players transform position
         transform.position = player.transform.position + offset;
+    }
+
+    public void ShrinkOffset()
+    {
+        offset = originalOffset / 2;
+    }
+    public void GrowOffset()
+    {
+        offset = originalOffset;
     }
 }
